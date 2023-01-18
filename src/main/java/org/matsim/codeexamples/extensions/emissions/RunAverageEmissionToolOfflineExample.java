@@ -21,8 +21,11 @@ package org.matsim.codeexamples.extensions.emissions;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.matsim.api.core.v01.Id;
 import org.matsim.api.core.v01.Scenario;
+import org.matsim.api.core.v01.network.Link;
 import org.matsim.contrib.emissions.EmissionModule;
+import org.matsim.contrib.emissions.EmissionUtils;
 import org.matsim.contrib.emissions.example.CreateEmissionConfig;
 import org.matsim.contrib.emissions.utils.EmissionsConfigGroup;
 import org.matsim.core.api.experimental.events.EventsManager;
@@ -30,15 +33,14 @@ import org.matsim.core.config.Config;
 import org.matsim.core.config.ConfigUtils;
 import org.matsim.core.controler.AbstractModule;
 import org.matsim.core.controler.Injector;
-import org.matsim.core.controler.OutputDirectoryHierarchy;
 import org.matsim.core.events.EventsUtils;
-import org.matsim.core.events.MatsimEventsReader;
 import org.matsim.core.events.algorithms.EventWriterXML;
 import org.matsim.core.network.NetworkUtils;
 import org.matsim.core.scenario.ScenarioUtils;
-import org.matsim.core.utils.io.IOUtils;
 import org.matsim.vehicles.MatsimVehicleWriter;
-import org.matsim.vehicles.VehicleUtils;
+
+import java.util.Iterator;
+import java.util.Map;
 
 import static org.matsim.contrib.emissions.utils.EmissionsConfigGroup.*;
 
@@ -88,6 +90,15 @@ public final class RunAverageEmissionToolOfflineExample{
 		// ---
 
 		Scenario scenario = ScenarioUtils.loadScenario( config ) ;
+/**
+ * uncomment the block below and find out why setHbefaRoadGradient cant be resolved
+ * @author Tim Kirschbaum
+ * */
+//		for (Link link : scenario.getNetwork().getLinks().values()) {
+//			if ( true ) {
+//				EmissionUtils.setHbefaRoadGradient( link, "+/-2%");
+//			}
+//		}
 
 		// examples for how to set attributes to links and vehicles in order to make this work (already there for example scenario):
 
@@ -122,6 +133,7 @@ public final class RunAverageEmissionToolOfflineExample{
 		};
 
 		com.google.inject.Injector injector = Injector.createInjector( config, module );
+
 
 		// the EmissionModule must be instantiated, otherwise it does not work:
 		injector.getInstance(EmissionModule.class);
