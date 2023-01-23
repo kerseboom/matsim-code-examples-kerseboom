@@ -26,6 +26,7 @@ import org.matsim.api.core.v01.Scenario;
 import org.matsim.api.core.v01.network.Link;
 import org.matsim.contrib.emissions.EmissionModule;
 import org.matsim.contrib.emissions.EmissionUtils;
+import org.matsim.contrib.emissions.HbefaRoadGradient;
 import org.matsim.contrib.emissions.example.CreateEmissionConfig;
 import org.matsim.contrib.emissions.utils.EmissionsConfigGroup;
 import org.matsim.core.api.experimental.events.EventsManager;
@@ -82,7 +83,7 @@ public final class RunAverageEmissionToolOfflineExample{
 //		emissionsConfig.setAverageWarmEmissionFactorsFile( "../sample_EFA_HOT_vehcat_2005average.csv" );
 
 			emissionsConfig.setAverageColdEmissionFactorsFile( "../sample_EFA_ColdStart_vehcat_2020_average_withHGVetc.csv" );
-			emissionsConfig.setAverageWarmEmissionFactorsFile( "../sample_41_EFA_HOT_vehcat_2020average.csv" );
+			emissionsConfig.setAverageWarmEmissionFactorsFile( "../EFA_HOT_Vehcat_avg_demo_all_gradients.csv" );
 
 			emissionsConfig.setNonScenarioVehicles( NonScenarioVehicles.abort );
 
@@ -98,10 +99,11 @@ public final class RunAverageEmissionToolOfflineExample{
 		 * */
 		for (Link link : scenario.getNetwork().getLinks().values()) {
 			if ( true ) {
-				if (Math.random()>=0.5){ //randomly use +/-4% gradient or +6%
-					EmissionUtils.setHbefaRoadGradient( link, "+/-4%");
-				}
-				else EmissionUtils.setHbefaRoadGradient( link, "+6%");
+//				if ( Math.random() >= 0.5 ) { //randomly use +/-4% gradient or +6%
+//					EmissionUtils.setHbefaRoadGradient( link, "+/-4%" );
+//				}
+//				else
+					EmissionUtils.setHbefaRoadGradient( link, "+6%" );
 			}
 		}
 
