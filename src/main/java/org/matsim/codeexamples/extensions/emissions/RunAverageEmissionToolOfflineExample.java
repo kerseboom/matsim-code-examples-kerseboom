@@ -90,15 +90,20 @@ public final class RunAverageEmissionToolOfflineExample{
 		// ---
 
 		Scenario scenario = ScenarioUtils.loadScenario( config ) ;
-/**
- * uncomment the block below and find out why setHbefaRoadGradient cant be resolved
- * @author Tim Kirschbaum
- * */
-//		for (Link link : scenario.getNetwork().getLinks().values()) {
-//			if ( true ) {
-//				EmissionUtils.setHbefaRoadGradient( link, "+/-2%");
-//			}
-//		}
+
+
+		/**
+		 * writes random gradients to the links of the network
+		 * @author Tim Kirschbaum
+		 * */
+		for (Link link : scenario.getNetwork().getLinks().values()) {
+			if ( true ) {
+				if (Math.random()>=0.5){ //randomly use +/-4% gradient or +6%
+					EmissionUtils.setHbefaRoadGradient( link, "+/-4%");
+				}
+				else EmissionUtils.setHbefaRoadGradient( link, "+6%");
+			}
+		}
 
 		// examples for how to set attributes to links and vehicles in order to make this work (already there for example scenario):
 

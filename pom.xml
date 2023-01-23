@@ -13,11 +13,11 @@
 		<!--release:-->
 <!--		<matsim.version>14.0</matsim.version>-->
 
-		<!--stable build based on weekly releases (recommended):-->
-		<matsim.version>15.0-2023w01</matsim.version>
+<!--		&lt;!&ndash;stable build based on weekly releases (recommended):&ndash;&gt;-->
+<!--		<matsim.version>15.0-2023w01</matsim.version>-->
 
-<!--		I think we should leave this at PR builds for better stability.  Please pull up every time you see this.  kai, dec'20 -->
-		<matsim.version>15.0-PR2344</matsim.version>
+<!--&lt;!&ndash;		I think we should leave this at PR builds for better stability.  Please pull up every time you see this.  kai, dec'20 &ndash;&gt;-->
+<!--		<matsim.version>15.0-PR2344</matsim.version>-->
 
 		<!--development head:-->
 		<matsim.version>15.0-SNAPSHOT</matsim.version>
