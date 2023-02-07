@@ -103,7 +103,7 @@ public final class RunAverageEmissionToolOfflineExample{
 //					EmissionUtils.setHbefaRoadGradient( link, "+/-4%" );
 //				}
 //				else
-					EmissionUtils.setHbefaRoadGradient( link, "+6%" );
+					EmissionUtils.setHbefaRoadGradient( link, "-6%" );
 			}
 		}
 
