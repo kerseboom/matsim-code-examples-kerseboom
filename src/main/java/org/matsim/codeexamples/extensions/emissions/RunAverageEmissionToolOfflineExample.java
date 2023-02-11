@@ -21,12 +21,10 @@ package org.matsim.codeexamples.extensions.emissions;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.matsim.api.core.v01.Id;
 import org.matsim.api.core.v01.Scenario;
 import org.matsim.api.core.v01.network.Link;
 import org.matsim.contrib.emissions.EmissionModule;
 import org.matsim.contrib.emissions.EmissionUtils;
-import org.matsim.contrib.emissions.HbefaRoadGradient;
 import org.matsim.contrib.emissions.example.CreateEmissionConfig;
 import org.matsim.contrib.emissions.utils.EmissionsConfigGroup;
 import org.matsim.core.api.experimental.events.EventsManager;
@@ -39,9 +37,6 @@ import org.matsim.core.events.algorithms.EventWriterXML;
 import org.matsim.core.network.NetworkUtils;
 import org.matsim.core.scenario.ScenarioUtils;
 import org.matsim.vehicles.MatsimVehicleWriter;
-
-import java.util.Iterator;
-import java.util.Map;
 
 import static org.matsim.contrib.emissions.utils.EmissionsConfigGroup.*;
 
@@ -94,16 +89,26 @@ public final class RunAverageEmissionToolOfflineExample{
 
 
 		/**
-		 * writes random gradients to the links of the network
+		 * writes (random) gradients to the links of the network
+		 * changing the values in the first if-statement acts like a switch
+		 *
 		 * @author Tim Kirschbaum
 		 * */
 		for (Link link : scenario.getNetwork().getLinks().values()) {
-			if ( true ) {
-//				if ( Math.random() >= 0.5 ) { //randomly use +/-4% gradient or +6%
-//					EmissionUtils.setHbefaRoadGradient( link, "+/-4%" );
-//				}
-//				else
-					EmissionUtils.setHbefaRoadGradient( link, "-6%" );
+			if ( true ) { //randomly assign gradients
+				if ( Math.random() >= 0.25 ) {
+					EmissionUtils.setHbefaRoadGradient( link, "+/-6%" );
+				} else if (Math.random() >= 0.5) {
+					EmissionUtils.setHbefaRoadGradient(link, "+/-2%");
+				} else if (Math.random() >= 0.75) {
+					EmissionUtils.setHbefaRoadGradient( link, "+4%" );
+					}
+				else {
+					EmissionUtils.setHbefaRoadGradient( link, "0%" );
+				}
+			}
+			if( false ) { //assign same gradient to all links
+				EmissionUtils.setHbefaRoadGradient( link, "+6%" );
 			}
 		}
 
@@ -148,7 +153,7 @@ public final class RunAverageEmissionToolOfflineExample{
 		// ---
 
 		// add events writer into emissions event handler
-		final EventWriterXML eventWriterXML = new EventWriterXML( config.controler().getOutputDirectory() + '/' + emissionEventOutputFileName );
+		final EventWriterXML eventWriterXML = new EventWriterXML( config.controler().getOutputDirectory() + '/' + emissionEventOutputFileName);
 		eventsManager.addHandler( eventWriterXML );
 
 		// read events file into the events reader.  EmissionsModule and events writer have been added as handlers, and will act accordingly.
